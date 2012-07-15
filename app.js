@@ -20,7 +20,14 @@ var inspaNote = function() {
         //
         // YOUR CODE SHOULD BEGIN BELOW
         //////////////////////////////////////////////////////////////////
+        if(localStorage) {
+            var data = localStorage[APPKEY];
+            if(data) {
+                note = JSON.parse(data);
+            } else {
 
+            }
+        }
 
 
 
@@ -66,9 +73,34 @@ var inspaNote = function() {
 
 
 
+            var link = $('<a>');
+            link.attr('href', '#').attr('data-noteidx', i).append(note.message);
+            link.bind('click', function() {
+                var index = $(this).data('noteidx');
+                editNote(index);
+
+            });
+            
 
 
+            var sublink = $('<a>');
+            sublink.attr('data-noteidx', i);
+            sublink.bind('click', function() {
+                var index = $(this).data('noteidx');
+                deleteNote(index);
 
+            });
+            
+
+            var li = $('<li>');
+            li.append(link).append(sublink);
+            console.log(li);
+
+            list.append(li);
+
+            console.log(link);
+            console.log(sublink);
+            console.log(list);
             /////////////////////////////////////////////////////////////////
             // YOUR CODE SHOULD END ABOVE
         }
